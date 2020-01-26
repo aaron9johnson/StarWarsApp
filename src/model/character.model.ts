@@ -30,7 +30,6 @@ export interface ICharacter {
   species?: string[];
   starships?: string[];
   vehicles?: string[];
-  planets?: string[];
   url?: string;
   created?: string;
   edited?: string;
@@ -51,7 +50,6 @@ export class Character implements ICharacter {
     public species?: string[],
     public starships?: string[],
     public vehicles?: string[],
-    public planets?: string[],
     public url?: string,
     public created?: string,
     public edited?: string

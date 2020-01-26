@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { IVehicle} from '@/model/vehicle.model';
+import { IVehicle } from '@/model/vehicle.model';
 
 const baseApiUrl = 'https://swapi.co/api/vehicles';
 

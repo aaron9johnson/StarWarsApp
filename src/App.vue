@@ -40,7 +40,7 @@ td {
   border-bottom: 1px solid rgba(0,0,0,0.12);
 }
 th {
-  min-width: 150px;
+  width: 150px;
   border-bottom: 1px solid rgba(0,0,0,0.12);
   border-right: 1px solid rgba(0,0,0,0.12);
 }

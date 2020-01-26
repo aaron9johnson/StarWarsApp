@@ -5,6 +5,9 @@ import Films from '../views/Films.vue'
 import FilmDetails from '../views/details/FilmDetails.vue';
 import CharacterDetails from '../views/details/CharacterDetails.vue';
 import VehicleDetails from '../views/details/VehicleDetails.vue';
+import SpeciesDetails from '../views/details/SpeciesDetails.vue';
+import StarshipDetails from '../views/details/StarshipDetails.vue';
+import PlanetDetails from '../views/details/PlanetDetails.vue';
 
 Vue.use(VueRouter)
 
@@ -33,6 +36,21 @@ const routes = [
     path: '/vehicle/:vehicle',
     name: 'vehicle-details',
     component: VehicleDetails
+  },
+  {
+    path: '/species/:species',
+    name: 'species-details',
+    component: SpeciesDetails
+  },
+  {
+    path: '/starship/:starship',
+    name: 'starship-details',
+    component: StarshipDetails
+  },
+  {
+    path: '/planet/:planet',
+    name: 'planet-details',
+    component: PlanetDetails
   },
   {
     path: '/about',
