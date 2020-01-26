@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Films from '../views/films/Films.vue'
-import FilmDetails from '../views/films/FilmDetails.vue';
-import CharacterDetails from '../views/character/CharacterDetails.vue';
+import Films from '../views/Films.vue'
+import FilmDetails from '../views/details/FilmDetails.vue';
+import CharacterDetails from '../views/details/CharacterDetails.vue';
+import VehicleDetails from '../views/details/VehicleDetails.vue';
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/character/:character',
     name: 'character-details',
     component: CharacterDetails
+  },
+  {
+    path: '/vehicle/:vehicle',
+    name: 'vehicle-details',
+    component: VehicleDetails
   },
   {
     path: '/about',
