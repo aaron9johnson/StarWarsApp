@@ -42,7 +42,7 @@
         <tr>
           <th>Films</th>
           <td>
-            <button v-for="film in films" :key="film" type="button" @click="filmDetails(film)">{{film.title}}</button>
+            <button v-for="film in films" :key="film.title" type="button" @click="filmDetails(film)">{{film.title}}</button>
           </td>
         </tr>
         <tr>
@@ -55,7 +55,9 @@
         </tr>
         <tr>
           <th>Vehicles</th>
-          <td>{{character.vehicles}}</td>
+          <td>
+            <button v-for="vehicle in vehicles" :key="vehicle.name" type="button" @click="vehicleDetails(vehicle)">{{vehicle.name}}</button>
+          </td>
         </tr>
         <tr>
           <th>Species</th>
