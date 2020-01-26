@@ -1,0 +1,83 @@
+<template>
+  <div class="character-details">
+    <h2>Character Details</h2>
+    <table>
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <td>{{character.name}}</td>
+        </tr>
+        <tr>
+          <th>Birth Year</th>
+          <td>{{character.birth_year}}</td>
+        </tr>
+        <tr>
+          <th>Eye Color</th>
+          <td>{{character.eye_color}}</td>
+        </tr>
+        <tr>
+          <th>Gender</th>
+          <td>{{character.gender}}</td>
+        </tr>
+        <tr>
+          <th>Hair Color</th>
+          <td>{{character.hair_color}}</td>
+        </tr>
+        <tr>
+          <th>Height</th>
+          <td>{{character.height}}</td>
+        </tr>
+         <tr>
+          <th>Mass</th>
+          <td>{{character.mass}}</td>
+        </tr>
+         <tr>
+          <th>Skin Color</th>
+          <td>{{character.skin_color}}</td>
+        </tr>
+         <tr>
+          <th>Homeworld</th>
+          <td>{{character.homeworld}}</td>
+        </tr>
+        <tr>
+          <th>Films</th>
+          <td>
+            <button v-for="film in films" :key="film" type="button" @click="filmDetails(film)">{{film.title}}</button>
+          </td>
+        </tr>
+        <tr>
+          <th>Planets</th>
+          <td>{{character.planets}}</td>
+        </tr>
+        <tr>
+          <th>Starships</th>
+          <td>{{character.starships}}</td>
+        </tr>
+        <tr>
+          <th>Vehicles</th>
+          <td>{{character.vehicles}}</td>
+        </tr>
+        <tr>
+          <th>Species</th>
+          <td>{{character.species}}</td>
+        </tr>
+        <tr>
+          <th>Created</th>
+          <td>{{character.created}}</td>
+        </tr>
+        <tr>
+          <th>Edited</th>
+          <td>{{character.edited}}</td>
+        </tr>
+        <tr>
+          <th>Url</th>
+          <td>{{character.url}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+
+
+<script lang="ts" src="./character-details.component.ts">
+</script>

@@ -33,7 +33,6 @@ export interface IFilm {
 
 export class Film implements IFilm {
   constructor(
-    public id?: number,
     public title?: string,
     public episode_id?: number,
     public opening_crawl?: string,

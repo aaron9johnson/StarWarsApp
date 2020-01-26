@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Films from '../views/films/Films.vue'
 import FilmDetails from '../views/films/FilmDetails.vue';
+import CharacterDetails from '../views/character/CharacterDetails.vue';
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/film/:film',
     name: 'film-details',
     component: FilmDetails
+  },
+  {
+    path: '/character/:character',
+    name: 'character-details',
+    component: CharacterDetails
   },
   {
     path: '/about',
