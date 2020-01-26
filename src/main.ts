@@ -2,13 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import FilmService from './service/film.service';
+import CharacterService from './service/character.service';
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
   provide: {
-    filmService: () => new FilmService()
+    filmService: () => new FilmService(),
+    characterService: () => new CharacterService()
   },
   render: h => h(App)
 }).$mount('#app')
