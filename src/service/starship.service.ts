@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-import { ICharacter } from '@/model/character.model';
+import { IStarship } from '@/model/starship.model';
 
-const baseApiUrl = 'https://swapi.co/api/people';
+const baseApiUrl = 'https://swapi.co/api/starships';
 
-export default class CharacterService {
-  public find(id: number): Promise<ICharacter> {
-    return new Promise<ICharacter>(resolve => {
+export default class StarshipService {
+  public find(id: number): Promise<IStarship> {
+    return new Promise<IStarship>(resolve => {
       axios.get(`${baseApiUrl}/${id}`).then(function(res) {
         resolve(res.data);
       });

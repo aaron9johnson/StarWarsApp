@@ -35,11 +35,15 @@
         </tr>
         <tr>
           <th>Planets</th>
-          <td>{{film.planets}}</td>
+          <td>
+            <button v-for="planet in planets" :key="planet.name" type="button" @click="planetDetails(planet)">{{planet.name}}</button>
+          </td>
         </tr>
         <tr>
           <th>Starships</th>
-          <td>{{film.starships}}</td>
+          <td>
+            <button v-for="starship in starships" :key="starship.name" type="button" @click="starshipDetails(starship)">{{starship.name}}</button>
+          </td>
         </tr>
         <tr>
           <th>Vehicles</th>
@@ -49,7 +53,9 @@
         </tr>
         <tr>
           <th>Species</th>
-          <td>{{film.species}}</td>
+          <td>
+            <button v-for="spec in species" :key="spec.name" type="button" @click="speciesDetails(spec)">{{spec.name}}</button>
+          </td>
         </tr>
         <tr>
           <th>Created</th>

@@ -17,7 +17,7 @@ export default class Films extends Vue {
         console.log(res);
       });
   }
-  public filmDetails(film:Film){
+  public filmDetails(film:IFilm){
     if (film.url){
       this.$router.push(`/film/${getIdfromUrl(film.url)}`); // grab swapi id from url
     }

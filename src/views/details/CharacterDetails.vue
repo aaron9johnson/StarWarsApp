@@ -37,7 +37,9 @@
         </tr>
          <tr>
           <th>Homeworld</th>
-          <td>{{character.homeworld}}</td>
+          <td>
+            <button v-if="planet" type="button" @click="planetDetails(planet)">{{planet.name}}</button>
+          </td>
         </tr>
         <tr>
           <th>Films</th>
@@ -46,12 +48,10 @@
           </td>
         </tr>
         <tr>
-          <th>Planets</th>
-          <td>{{character.planets}}</td>
-        </tr>
-        <tr>
           <th>Starships</th>
-          <td>{{character.starships}}</td>
+          <td>
+            <button v-for="starship in starships" :key="starship.name" type="button" @click="starshipDetails(starship)">{{starship.name}}</button>
+          </td>
         </tr>
         <tr>
           <th>Vehicles</th>
@@ -61,7 +61,9 @@
         </tr>
         <tr>
           <th>Species</th>
-          <td>{{character.species}}</td>
+          <td>
+            <button v-for="spec in species" :key="spec.name" type="button" @click="speciesDetails(spec)">{{spec.name}}</button>
+          </td>
         </tr>
         <tr>
           <th>Created</th>

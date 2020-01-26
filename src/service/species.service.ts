@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-import { ICharacter } from '@/model/character.model';
+import { ISpecies } from '@/model/species.model';
 
-const baseApiUrl = 'https://swapi.co/api/people';
+const baseApiUrl = 'https://swapi.co/api/species';
 
-export default class CharacterService {
-  public find(id: number): Promise<ICharacter> {
-    return new Promise<ICharacter>(resolve => {
+export default class SpeciesService {
+  public find(id: number): Promise<ISpecies> {
+    return new Promise<ISpecies>(resolve => {
       axios.get(`${baseApiUrl}/${id}`).then(function(res) {
         resolve(res.data);
       });
