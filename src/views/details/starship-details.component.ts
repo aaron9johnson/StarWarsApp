@@ -31,22 +31,27 @@ export default class StarshipDetails extends Vue {
       .find(id)
       .then(res => {
         this.starship = res;
-        this.retrieveFilms();
-        this.retrieveCharacters();
+        Promise.all([
+          this.retrieveFilms(),
+          this.retrieveCharacters()
+        ]);
       });
   }
 
-  //Films
-  public retrieveFilms(){
+  // Films
+  public async retrieveFilms(){
     if (this.starship.films){
       this.films = [];
+      let filmPromises: Array<Promise<IFilm>> = [];
       this.starship.films.forEach(film => {
-        this.filmService()
-          .find(getIdfromUrl(film))
-          .then(res => {
-            this.films.push(res)
-          });
-      });
+        filmPromises.push(
+          this.filmService()
+            .find(getIdfromUrl(film)));
+        });
+      Promise.all(filmPromises)
+        .then(result => {
+          this.films = result;
+        });
     }
   }
   public filmDetails(film:IFilm){
@@ -56,16 +61,19 @@ export default class StarshipDetails extends Vue {
   }
 
   // Characters
-  public retrieveCharacters(){
+  public async retrieveCharacters(){
     if (this.starship.pilots){
       this.characters = [];
+      let characterPromises: Array<Promise<ICharacter>> = [];
       this.starship.pilots.forEach(character => {
-        this.characterService()
-          .find(getIdfromUrl(character))
-          .then(res => {
-            this.characters.push(res)
-          });
-      });
+        characterPromises.push(
+          this.characterService()
+            .find(getIdfromUrl(character)));
+        });
+      Promise.all(characterPromises)
+        .then(result => {
+          this.characters = result;
+        });
     }
   }
   public characterDetails(character:ICharacter){

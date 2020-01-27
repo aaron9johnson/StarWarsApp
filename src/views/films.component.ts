@@ -14,7 +14,6 @@ export default class Films extends Vue {
       .retrieve()
       .then(res => {
         this.films = res.data.results;
-        console.log(res);
       });
   }
   public filmDetails(film:IFilm){
