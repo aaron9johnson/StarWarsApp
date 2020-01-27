@@ -1,5 +1,16 @@
 # star-wars-app
 
+Star Wars info application using [Star Wars API](https://swapi.co/) by Aaron Johnson
+
+## Questions
+1. Assuming the Star Wars API was slow, what are some optimizations that could be implemented to improve the user experience?
+```
+I would definetly implement a caching layer in the services to eliminate repeated calls made to the API. Resources are unnecessarily re-retrieved which definetly impacts page load time and the overall user experience.
+```
+2. Any improvements you would make to your application?
+```
+I would style the app, probably just using bootstrap to start, because it looks very ugly. Most of the application is just tables and buttons so making it look good would not take very long.
+```
 ## Project setup
 ```
 npm install
@@ -9,19 +20,6 @@ npm install
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # Vue Generation
 ```
