@@ -4,10 +4,9 @@
     <h1>Star Wars App</h1>
     <router-view/>
     <div id="nav">
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> | -->
       <router-link to="/films">Films</router-link>
     </div>
+    <p id="footer">Aaron Johnson</p>
   </div>
 </template>
 
@@ -33,7 +32,8 @@
   color: #42b983;
 }
 table {
-  width: 100%;
+  width: 90%;
+  margin: auto;
 }
 td {
   text-align: left;
@@ -46,5 +46,11 @@ th {
 }
 img {
   height: 100px;
+}
+button {
+  padding: 5px;
+}
+#footer {
+  color: lightgrey;
 }
 </style>

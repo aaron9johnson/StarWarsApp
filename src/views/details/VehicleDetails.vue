@@ -59,7 +59,7 @@
             <button v-for="character in characters" :key="character.name" type="button" @click="characterDetails(character)">{{character.name}}</button>
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <th>Created</th>
           <td>{{vehicle.created}}</td>
         </tr>
@@ -70,7 +70,7 @@
         <tr>
           <th>Url</th>
           <td>{{vehicle.url}}</td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>
