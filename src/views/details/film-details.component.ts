@@ -42,25 +42,30 @@ export default class FilmDetails extends Vue {
       .find(id)
       .then(res => {
         this.film = res;
-        this.retrieveCharacters();
-        this.retrievePlanets();
-        this.retrieveStarships();
-        this.retrieveVehicles();
-        this.retrieveSpecies();
+        Promise.all([
+          this.retrieveCharacters(),
+          this.retrievePlanets(),
+          this.retrieveStarships(),
+          this.retrieveVehicles(),
+          this.retrieveSpecies()
+        ]);
       });
   }
 
   // Characters
-  public retrieveCharacters(){
+  public async retrieveCharacters(){
     if (this.film.characters){
       this.characters = [];
+      let characterPromises: Array<Promise<ICharacter>> = [];
       this.film.characters.forEach(character => {
-        this.characterService()
-          .find(getIdfromUrl(character))
-          .then(res => {
-            this.characters.push(res)
-          });
-      });
+        characterPromises.push(
+          this.characterService()
+            .find(getIdfromUrl(character)));
+        });
+      Promise.all(characterPromises)
+        .then(result => {
+          this.characters = result;
+        });
     }
   }
   public characterDetails(character:ICharacter){
@@ -70,16 +75,19 @@ export default class FilmDetails extends Vue {
   }
 
   // Planets
-  public retrievePlanets(){
+  public async retrievePlanets(){
     if (this.film.planets){
       this.planets = [];
+      let planetPromises: Array<Promise<IPlanet>> = [];
       this.film.planets.forEach(planet => {
-        this.planetService()
-          .find(getIdfromUrl(planet))
-          .then(res => {
-            this.planets.push(res)
-          });
-      });
+        planetPromises.push(
+          this.planetService()
+            .find(getIdfromUrl(planet)));
+        });
+      Promise.all(planetPromises)
+        .then(result => {
+          this.planets = result;
+        });
     }
   }
   public planetDetails(planet:IPlanet){
@@ -89,16 +97,19 @@ export default class FilmDetails extends Vue {
   }
 
   // Starships
-  public retrieveStarships(){
+  public async retrieveStarships(){
     if (this.film.starships){
       this.starships = [];
+      let starshipPromises: Array<Promise<IStarship>> = [];
       this.film.starships.forEach(starship => {
-        this.starshipService()
-          .find(getIdfromUrl(starship))
-          .then(res => {
-            this.starships.push(res)
-          });
-      });
+        starshipPromises.push(
+          this.starshipService()
+            .find(getIdfromUrl(starship)));
+        });
+      Promise.all(starshipPromises)
+        .then(result => {
+          this.starships = result;
+        });
     }
   }
   public starshipDetails(starship:IStarship){
@@ -108,16 +119,19 @@ export default class FilmDetails extends Vue {
   }
 
   //Vehicles
-  public retrieveVehicles(){
+  public async retrieveVehicles(){
     if (this.film.vehicles){
       this.vehicles = [];
+      let vehiclePromises: Array<Promise<IVehicle>> = [];
       this.film.vehicles.forEach(vehicle => {
-        this.vehicleService()
-          .find(getIdfromUrl(vehicle))
-          .then(res => {
-            this.vehicles.push(res)
-          });
-      });
+        vehiclePromises.push(
+          this.vehicleService()
+            .find(getIdfromUrl(vehicle)));
+        });
+      Promise.all(vehiclePromises)
+        .then(result => {
+          this.vehicles = result;
+        });
     }
   }
   public vehicleDetails(vehicle:IVehicle){
@@ -127,16 +141,19 @@ export default class FilmDetails extends Vue {
   }
 
   // Species
-  public retrieveSpecies(){
+  public async retrieveSpecies(){
     if (this.film.species){
       this.species = [];
+      let speciesPromises: Array<Promise<ISpecies>> = [];
       this.film.species.forEach(species => {
-        this.speciesService()
-          .find(getIdfromUrl(species))
-          .then(res => {
-            this.species.push(res)
-          });
-      });
+        speciesPromises.push(
+          this.speciesService()
+            .find(getIdfromUrl(species)));
+        });
+      Promise.all(speciesPromises)
+        .then(result => {
+          this.species = result;
+        });
     }
   }
   public speciesDetails(species:ISpecies){

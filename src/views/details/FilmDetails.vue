@@ -57,7 +57,7 @@
             <button v-for="spec in species" :key="spec.name" type="button" @click="speciesDetails(spec)">{{spec.name}}</button>
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <th>Created</th>
           <td>{{film.created}}</td>
         </tr>
@@ -68,7 +68,7 @@
         <tr>
           <th>Url</th>
           <td>{{film.url}}</td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>

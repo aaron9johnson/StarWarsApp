@@ -27,22 +27,27 @@ export default class VehicleDetails extends Vue {
       .find(id)
       .then(res => {
         this.vehicle = res;
-        this.retrieveFilms();
-        this.retrieveCharacters();
+        Promise.all([
+          this.retrieveFilms(),
+          this.retrieveCharacters()
+        ]);
       });
   }
 
-  //Films
-  public retrieveFilms(){
+  // Films
+  public async retrieveFilms(){
     if (this.vehicle.films){
       this.films = [];
+      let filmPromises: Array<Promise<IFilm>> = [];
       this.vehicle.films.forEach(film => {
-        this.filmService()
-          .find(getIdfromUrl(film))
-          .then(res => {
-            this.films.push(res)
-          });
-      });
+        filmPromises.push(
+          this.filmService()
+            .find(getIdfromUrl(film)));
+        });
+      Promise.all(filmPromises)
+        .then(result => {
+          this.films = result;
+        });
     }
   }
   public filmDetails(film:IFilm){
@@ -51,17 +56,20 @@ export default class VehicleDetails extends Vue {
     }
   }
 
-  //Characters
-  public retrieveCharacters(){
+  // Characters
+  public async retrieveCharacters(){
     if (this.vehicle.pilots){
       this.characters = [];
+      let characterPromises: Array<Promise<ICharacter>> = [];
       this.vehicle.pilots.forEach(character => {
-        this.characterService()
-          .find(getIdfromUrl(character))
-          .then(res => {
-            this.characters.push(res)
-          });
-      });
+        characterPromises.push(
+          this.characterService()
+            .find(getIdfromUrl(character)));
+        });
+      Promise.all(characterPromises)
+        .then(result => {
+          this.characters = result;
+        });
     }
   }
   public characterDetails(character:ICharacter){

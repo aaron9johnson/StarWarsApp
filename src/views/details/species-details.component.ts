@@ -22,7 +22,7 @@ export default class SpeciesDetails extends Vue {
   public species: ISpecies = new Species();
   public films: Array<IFilm> = [];
   public characters: Array<ICharacter> = [];
-  public planet?: IPlanet = undefined;
+  public planet: IPlanet | null = null;
 
   beforeMount(): void {
     if (this.$router.currentRoute.params.species) {
@@ -34,23 +34,28 @@ export default class SpeciesDetails extends Vue {
       .find(id)
       .then(res => {
         this.species = res;
-        this.retrieveFilms();
-        this.retrieveCharacters();
-        this.retrievePlanet();
+        Promise.all([
+          this.retrieveFilms(),
+          this.retrieveCharacters(),
+          this.retrievePlanet()
+        ]);
       });
   }
 
-  //Films
-  public retrieveFilms(){
+  // Films
+  public async retrieveFilms(){
     if (this.species.films){
       this.films = [];
+      let filmPromises: Array<Promise<IFilm>> = [];
       this.species.films.forEach(film => {
-        this.filmService()
-          .find(getIdfromUrl(film))
-          .then(res => {
-            this.films.push(res)
-          });
-      });
+        filmPromises.push(
+          this.filmService()
+            .find(getIdfromUrl(film)));
+        });
+      Promise.all(filmPromises)
+        .then(result => {
+          this.films = result;
+        });
     }
   }
   public filmDetails(film:IFilm){
@@ -60,16 +65,19 @@ export default class SpeciesDetails extends Vue {
   }
 
   // Characters
-  public retrieveCharacters(){
+  public async retrieveCharacters(){
     if (this.species.people){
       this.characters = [];
+      let characterPromises: Array<Promise<ICharacter>> = [];
       this.species.people.forEach(character => {
-        this.characterService()
-          .find(getIdfromUrl(character))
-          .then(res => {
-            this.characters.push(res)
-          });
-      });
+        characterPromises.push(
+          this.characterService()
+            .find(getIdfromUrl(character)));
+        });
+      Promise.all(characterPromises)
+        .then(result => {
+          this.characters = result;
+        });
     }
   }
   public characterDetails(character:ICharacter){
@@ -79,14 +87,14 @@ export default class SpeciesDetails extends Vue {
   }
 
   // Planets
-  public retrievePlanet(){
+  public async retrievePlanet(){
     if (this.species.homeworld){
-      this.planet = undefined;
+      this.planet = null;
       this.planetService()
-          .find(getIdfromUrl(this.species.homeworld))
-          .then(res => {
-            this.planet = res;
-          });
+        .find(getIdfromUrl(this.species.homeworld))
+        .then(res => {
+          this.planet = res;
+        });
     }
   }
   public planetDetails(planet:IPlanet){

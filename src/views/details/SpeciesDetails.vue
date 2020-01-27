@@ -57,7 +57,7 @@
             <button v-for="film in films" :key="film.title" type="button" @click="filmDetails(film)">{{film.title}}</button>
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <th>Created</th>
           <td>{{species.created}}</td>
         </tr>
@@ -68,7 +68,7 @@
         <tr>
           <th>Url</th>
           <td>{{species.url}}</td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>

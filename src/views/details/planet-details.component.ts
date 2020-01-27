@@ -31,22 +31,27 @@ export default class PlanetDetails extends Vue {
       .find(id)
       .then(res => {
         this.planet = res;
-        this.retrieveFilms();
-        this.retrieveCharacters();
+        Promise.all([
+          this.retrieveFilms(),
+          this.retrieveCharacters()
+        ]);
       });
   }
 
-  //Films
-  public retrieveFilms(){
+  // Films
+  public async retrieveFilms(){
     if (this.planet.films){
       this.films = [];
+      let filmPromises: Array<Promise<IFilm>> = [];
       this.planet.films.forEach(film => {
-        this.filmService()
-          .find(getIdfromUrl(film))
-          .then(res => {
-            this.films.push(res)
-          });
-      });
+        filmPromises.push(
+          this.filmService()
+            .find(getIdfromUrl(film)));
+        });
+      Promise.all(filmPromises)
+        .then(result => {
+          this.films = result;
+        });
     }
   }
   public filmDetails(film:IFilm){
@@ -56,16 +61,19 @@ export default class PlanetDetails extends Vue {
   }
 
   // Characters
-  public retrieveCharacters(){
+  public async retrieveCharacters(){
     if (this.planet.residents){
       this.characters = [];
+      let characterPromises: Array<Promise<ICharacter>> = [];
       this.planet.residents.forEach(character => {
-        this.characterService()
-          .find(getIdfromUrl(character))
-          .then(res => {
-            this.characters.push(res)
-          });
-      });
+        characterPromises.push(
+          this.characterService()
+            .find(getIdfromUrl(character)));
+        });
+      Promise.all(characterPromises)
+        .then(result => {
+          this.characters = result;
+        });
     }
   }
   public characterDetails(character:ICharacter){

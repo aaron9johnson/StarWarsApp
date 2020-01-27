@@ -29,7 +29,7 @@ export default class CharacterDetails extends Vue {
   public films: Array<IFilm> = [];
   public vehicles: Array<IVehicle> = [];
   public species: Array<ISpecies> = [];
-  public planet?: IPlanet = undefined;
+  public planet: IPlanet | null = null;
   public starships: Array<IStarship> = [];
 
   beforeMount(): void {
@@ -42,25 +42,30 @@ export default class CharacterDetails extends Vue {
       .find(id)
       .then(res => {
         this.character = res;
-        this.retrieveFilms();
-        this.retrievePlanet();
-        this.retrieveStarships();
-        this.retrieveVehicles();
-        this.retrieveSpecies();
+        Promise.all([
+          this.retrieveFilms(),
+          this.retrievePlanet(),
+          this.retrieveStarships(),
+          this.retrieveVehicles(),
+          this.retrieveSpecies()
+        ]);
       });
   }
 
-  //Films
-  public retrieveFilms(){
+  // Films
+  public async retrieveFilms(){
     if (this.character.films){
       this.films = [];
+      let filmPromises: Array<Promise<IFilm>> = [];
       this.character.films.forEach(film => {
-        this.filmService()
-          .find(getIdfromUrl(film))
-          .then(res => {
-            this.films.push(res)
-          });
-      });
+        filmPromises.push(
+          this.filmService()
+            .find(getIdfromUrl(film)));
+        });
+      Promise.all(filmPromises)
+        .then(result => {
+          this.films = result;
+        });
     }
   }
   public filmDetails(film:IFilm){
@@ -70,14 +75,14 @@ export default class CharacterDetails extends Vue {
   }
 
   // Planets
-  public retrievePlanet(){
+  public async retrievePlanet(){
     if (this.character.homeworld){
-      this.planet = undefined;
+      this.planet = null;
       this.planetService()
-          .find(getIdfromUrl(this.character.homeworld))
-          .then(res => {
-            this.planet = res;
-          });
+        .find(getIdfromUrl(this.character.homeworld))
+        .then(res => {
+          this.planet = res;
+        });
     }
   }
   public planetDetails(planet:IPlanet){
@@ -87,16 +92,19 @@ export default class CharacterDetails extends Vue {
   }
 
   // Starships
-  public retrieveStarships(){
+  public async retrieveStarships(){
     if (this.character.starships){
       this.starships = [];
+      let starshipPromises: Array<Promise<IStarship>> = [];
       this.character.starships.forEach(starship => {
-        this.starshipService()
-          .find(getIdfromUrl(starship))
-          .then(res => {
-            this.starships.push(res)
-          });
-      });
+        starshipPromises.push(
+          this.starshipService()
+            .find(getIdfromUrl(starship)));
+        });
+      Promise.all(starshipPromises)
+        .then(result => {
+          this.starships = result;
+        });
     }
   }
   public starshipDetails(starship:IStarship){
@@ -106,16 +114,19 @@ export default class CharacterDetails extends Vue {
   }
 
   //Vehicles
-  public retrieveVehicles(){
+  public async retrieveVehicles(){
     if (this.character.vehicles){
       this.vehicles = [];
+      let vehiclePromises: Array<Promise<IVehicle>> = [];
       this.character.vehicles.forEach(vehicle => {
-        this.vehicleService()
-          .find(getIdfromUrl(vehicle))
-          .then(res => {
-            this.vehicles.push(res)
-          });
-      });
+        vehiclePromises.push(
+          this.vehicleService()
+            .find(getIdfromUrl(vehicle)));
+        });
+      Promise.all(vehiclePromises)
+        .then(result => {
+          this.vehicles = result;
+        });
     }
   }
   public vehicleDetails(vehicle:IVehicle){
@@ -125,16 +136,19 @@ export default class CharacterDetails extends Vue {
   }
 
   // Species
-  public retrieveSpecies(){
+  public async retrieveSpecies(){
     if (this.character.species){
       this.species = [];
+      let speciesPromises: Array<Promise<ISpecies>> = [];
       this.character.species.forEach(species => {
-        this.speciesService()
-          .find(getIdfromUrl(species))
-          .then(res => {
-            this.species.push(res)
-          });
-      });
+        speciesPromises.push(
+          this.speciesService()
+            .find(getIdfromUrl(species)));
+        });
+      Promise.all(speciesPromises)
+        .then(result => {
+          this.species = result;
+        });
     }
   }
   public speciesDetails(species:ISpecies){
