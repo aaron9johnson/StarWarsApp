@@ -1,6 +1,13 @@
 <template>
   <div class="films">
     <h2>Films</h2>
+    <br>
+    <div>
+      <label>Search: </label>
+      <input v-model="searchText" placeholder="search films">
+      <button type="button" @click="search()">Go</button>
+    </div>
+    <br>
     <table>
       <thead>
         <tr>

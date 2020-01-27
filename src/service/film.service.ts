@@ -20,4 +20,11 @@ export default class FilmService {
       });
     });
   }
+  public search(searchText: string): Promise<any> {
+    return new Promise<any>(resolve => {
+      axios.get(`${baseApiUrl}?search=${searchText}`).then(function(res) {
+        resolve(res);
+      });
+    });
+  }
 }
