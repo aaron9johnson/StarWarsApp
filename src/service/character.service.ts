@@ -2,12 +2,13 @@ import axios from 'axios';
 
 import { ICharacter } from '@/model/character.model';
 
-const baseApiUrl = 'https://swapi.co/api/people';
+const apiUrl = `${process.env.VUE_APP_API_BASE_URL}/people`;
 
 export default class CharacterService {
+  
   public find(id: number): Promise<ICharacter> {
     return new Promise<ICharacter>(resolve => {
-      axios.get(`${baseApiUrl}/${id}`).then(function(res) {
+      axios.get(`${apiUrl}/${id}`).then(function(res) {
         resolve(res.data);
       });
     });
@@ -15,7 +16,7 @@ export default class CharacterService {
 
   public retrieve(): Promise<any> {
     return new Promise<any>(resolve => {
-      axios.get(baseApiUrl).then(function(res) {
+      axios.get(apiUrl).then(function(res) {
         resolve(res);
       });
     });

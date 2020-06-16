@@ -1,6 +1,6 @@
 # star-wars-app
 
-Star Wars info application using [Star Wars API](https://swapi.co/) by Aaron Johnson
+Star Wars info application using [Star Wars API](https://swapi.dev/) by Aaron Johnson
 
 ## Questions
 1. Assuming the Star Wars API was slow, what are some optimizations that could be implemented to improve the user experience?
@@ -20,6 +20,7 @@ npm install
 ```
 npm run serve
 ```
+[localhost:8080](localhost:8080/)
 
 ## Vue Generation
 ```

@@ -2,12 +2,12 @@ import axios from 'axios';
 
 import { IFilm } from '@/model/film.model';
 
-const baseApiUrl = 'https://swapi.co/api/films';
+const apiUrl = `${process.env.VUE_APP_API_BASE_URL}/films`;
 
 export default class FilmService {
   public find(id: number): Promise<IFilm> {
     return new Promise<IFilm>(resolve => {
-      axios.get(`${baseApiUrl}/${id}`).then(function(res) {
+      axios.get(`${apiUrl}/${id}`).then(function(res) {
         resolve(res.data);
       });
     });
@@ -15,7 +15,7 @@ export default class FilmService {
 
   public retrieve(): Promise<any> {
     return new Promise<any>(resolve => {
-      axios.get(baseApiUrl).then(function(res) {
+      axios.get(apiUrl).then(function(res) {
         resolve(res);
       });
     });

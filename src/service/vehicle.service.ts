@@ -2,12 +2,12 @@ import axios from 'axios';
 
 import { IVehicle } from '@/model/vehicle.model';
 
-const baseApiUrl = 'https://swapi.co/api/vehicles';
+const apiUrl = `${process.env.VUE_APP_API_BASE_URL}/vehicles`;
 
 export default class VehicleService {
   public find(id: number): Promise<IVehicle> {
     return new Promise<IVehicle>(resolve => {
-      axios.get(`${baseApiUrl}/${id}`).then(function(res) {
+      axios.get(`${apiUrl}/${id}`).then(function(res) {
         resolve(res.data);
       });
     });
@@ -15,7 +15,7 @@ export default class VehicleService {
 
   public retrieve(): Promise<any> {
     return new Promise<any>(resolve => {
-      axios.get(baseApiUrl).then(function(res) {
+      axios.get(apiUrl).then(function(res) {
         resolve(res);
       });
     });
